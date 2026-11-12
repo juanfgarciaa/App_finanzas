@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Tokens de diseño. Para cambiar la paleta basta con editar estos valores. */
+@theme {
+  --font-sans: "Bricolage Grotesque Variable", system-ui, sans-serif;
+
+  /* Base oscura: fondo, tarjetas y el "nivel" de la nómina que baja. */
+  --color-cobalto: #141a4f;   /* fondo de la app */
+  --color-panel: #1e2766;     /* tarjetas */
+  --color-nivel: #3446d6;     /* relleno de la tarjeta de saldo: normal */
+  --color-nivel-bajo: #b45309;     /* queda menos del 25 % */
+  --color-nivel-agotado: #c93a24;  /* te has pasado */
+  --color-acento: #f5c542;    /* botones, avisos y foco */
+  --color-tinta: #12122b;     /* texto sobre el acento */
+
+  /* Categorías: tonos profundos, todos con texto blanco legible (contraste >= 4,5). */
+  --color-menta: #0b7a52;
+  --color-coral: #c93a24;
+  --color-cielo: #2563eb;
+  --color-sol: #b45309;
+  --color-rosa: #be185d;
+  --color-lila: #7c3aed;
+  --color-naranja: #c2410c;
+  --color-lima: #0e7490;
+}
+
+html { background: var(--color-cobalto); color: white; }
+body { font-family: var(--font-sans); font-variation-settings: "wdth" 100; -webkit-font-smoothing: antialiased; }
+
+/* Foco siempre visible para teclado. */
+:focus-visible { outline: 3px solid var(--color-acento); outline-offset: 3px; }
+
+/* Componentes reutilizables. Van en su capa para que las utilidades
+   de Tailwind puedan sobrescribirlos sin pelear por especificidad. */
+@layer components {
+  .campo {
+    width: 100%;
+    background: rgb(255 255 255 / 0.08);
+    border: 2px solid rgb(255 255 255 / 0.2);
+    border-radius: 1rem;
+    padding: 0.7rem 1rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1.375rem;
+    line-height: 1.2;
+  }
+  .campo::placeholder { color: rgb(255 255 255 / 0.45); }
+  .boton {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 3.25rem; padding: 0 1.75rem;
+    border-radius: 999px; border: 0;
+    background: var(--color-acento); color: var(--color-tinta);
+    font-weight: 800; font-size: 1.125rem; cursor: pointer;
+  }
+  .boton:disabled { opacity: 0.4; cursor: not-allowed; }
+  .boton-suave {
+    background: transparent; color: white;
+    box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
